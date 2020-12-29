@@ -8,8 +8,8 @@ namespace Q3LogConverter.lib.impl
 {
     abstract class AbstractLogConverter : LogConverter
     {
-        protected static Regex colorCodeRegex = new Regex("\\^\\d");
-        protected static Regex colorCodeAndTextRegex = new Regex("\\^(\\d)(.*?)(?=\\^|$)");
+        protected static Regex colorCodeRegex = new Regex("\\^([0-9a-zA-Z]|$)");
+        protected static Regex colorCodeAndTextRegex = new Regex("\\^([0-9a-zA-Z]|$)(.*?)(?=\\^|$)");
         
         public abstract string Convert(string inputString, ColorProcessing colorProcessing);
 

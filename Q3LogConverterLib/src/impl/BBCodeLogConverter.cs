@@ -34,9 +34,18 @@ namespace Q3LogConverter.lib.impl
         {
             if (m.Groups.Count == 3)
             {
-                int color = int.Parse(m.Groups[1].Value);
-                string text = m.Groups[2].Value;
-                return "[color=" + colorTable[color] + "]" + text + "[/color]";
+                if (m.Groups[1].Value != "")
+                {
+                    int color;
+                    if (int.TryParse(m.Groups[1].Value, out color) && color < colorTable.Length)
+                        return "[color=" + colorTable[color] + "]" + m.Groups[2].Value + "[/color]";
+                    else
+                        return m.Groups[2].Value;
+                }
+                else
+                {
+                    return "";
+                }
             }
             else
             {
