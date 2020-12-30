@@ -1,0 +1,21 @@
+name: build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Build artifacts
+      run: msbuild /p:Configuration=Release
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifacts
+        path: |
+          Q3LogConverterGui/bin/Release/*.exe
+          Q3LogConverterGui/bin/Release/*.dll
